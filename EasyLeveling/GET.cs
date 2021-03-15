@@ -84,8 +84,25 @@ namespace EasyLeveling
                     break;
                 }
             }
-            value *= 1000;
+            value *= 100;
             return Convert.ToInt32(value);
+        }
+        static public int SKO(string dataLine)
+        {
+            Match match = Regex.Match(dataLine, @"391\.08(.*?)\s");
+            var res = match.Groups[1].Value;
+            if (res.Contains("-"))
+            {
+                res = res.Remove(0, 1).TrimStart('0');
+                if (res == "") return 0;
+                return (int.Parse(res) * -1);
+            }
+            else
+            {
+                res = res.Remove(0, 1).TrimStart('0');
+                if (res == "") return 0;
+                return int.Parse(res);
+            }
         }
         static public double IntroductionError(double sigma)
         {
@@ -94,5 +111,6 @@ namespace EasyLeveling
             double result = (Math.Cos(Convert.ToDouble(2 * Math.PI) * Convert.ToDouble(value1) / 1000) * Math.Sqrt(-2 * Math.Log(Convert.ToDouble(value2) / 1000))) * sigma;
             return result;
         }
+
     }
 }

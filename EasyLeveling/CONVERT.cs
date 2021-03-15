@@ -129,6 +129,11 @@ namespace EasyLeveling
             }
             return result;
         }
+        public static string ToStationStringBuilder(string dataLine, int groundHeight, bool IsGSI_16)
+        {
+            Regex regex = new Regex(@"83\.\.\d{2}(.*?)\s");
+            return regex.Replace(dataLine, $"83..08{ToFormateGSI(groundHeight, IsGSI_16)}");
+        }
         static public string ChangeValueInLine(string rowData, int distance, int levelHeigth, string code, bool IsGSI_16)
         {
             string result = new Regex(@"32\.\.\.8(.*?)\s").Replace(rowData, $"32...8{CONVERT.ToFormateGSI(distance, IsGSI_16)} ");

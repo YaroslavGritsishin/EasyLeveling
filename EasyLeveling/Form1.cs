@@ -106,6 +106,11 @@ namespace EasyLeveling
                     implementations.SaveFile(res, OpenFile, Implementations.SaveFileType.CD31);
                 }
             }
+            else
+            {
+                data =  implementations.MainAction(data, dataGrid, IsGSI_16);
+                implementations.SaveFile(data, OpenFile, Implementations.SaveFileType.CHANGED);
+            }
             if(IsCredoCreated)
             {
                 var res = await Task.Factory.StartNew(() => ForCredo.CreateFile(data, IsGSI_16));
